@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Dry Cleaning SaaS Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+      <a class="navbar-brand" href="/">Dry Cleaning SaaS</a>
+      <button
+        class="navbar-toggler navbar-toggler-right"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarResponsive"
+        aria-controls="navbarResponsive"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+            <a class="nav-link app-nav-link active" href="#" data-target="dashboard-section">
+              <i class="fa fa-fw fa-dashboard"></i>
+              <span class="nav-link-text">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item admin-only" data-toggle="tooltip" data-placement="right" title="Vendors">
+            <a class="nav-link app-nav-link" href="#" data-target="vendors-section">
+              <i class="fa fa-fw fa-building"></i>
+              <span class="nav-link-text">Vendorlar</span>
+            </a>
+          </li>
+          <li class="nav-item admin-only" data-toggle="tooltip" data-placement="right" title="Operators">
+            <a class="nav-link app-nav-link" href="#" data-target="operators-section">
+              <i class="fa fa-fw fa-users"></i>
+              <span class="nav-link-text">Operatorler</span>
+            </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders">
+            <a class="nav-link app-nav-link" href="#" data-target="orders-section">
+              <i class="fa fa-fw fa-table"></i>
+              <span class="nav-link-text">Siparisler</span>
+            </a>
+          </li>
+          <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Login">
+            <a class="nav-link app-nav-link" href="#" data-target="login-section">
+              <i class="fa fa-fw fa-key"></i>
+              <span class="nav-link-text">Giris</span>
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav sidenav-toggler">
+          <li class="nav-item">
+            <a class="nav-link text-center" id="sidenavToggler" href="#">
+              <i class="fa fa-fw fa-angle-left"></i>
+            </a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3 mt-2 text-light small">
+            <span id="top-user-summary">Oturum yok</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="logout-btn">
+              <i class="fa fa-fw fa-sign-out"></i>Cikis
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="content-wrapper">
+      <div class="container-fluid">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Operasyon</a></li>
+          <li class="breadcrumb-item active" id="breadcrumb-current">Dashboard</li>
+        </ol>
+
+        <section id="dashboard-section" class="app-section">
+          <div class="row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-primary o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon"><i class="fa fa-fw fa-shopping-bag"></i></div>
+                  <div class="mr-5" id="metric-total-orders">0 Toplam Siparis</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-warning o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon"><i class="fa fa-fw fa-truck"></i></div>
+                  <div class="mr-5" id="metric-assigned-orders">0 Atanmis Siparis</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-success o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon"><i class="fa fa-fw fa-refresh"></i></div>
+                  <div class="mr-5" id="metric-progress-orders">0 Aktif Surec</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+              <div class="card text-white bg-danger o-hidden h-100">
+                <div class="card-body">
+                  <div class="card-body-icon"><i class="fa fa-fw fa-check-circle"></i></div>
+                  <div class="mr-5" id="metric-delivered-orders">0 Teslim Edildi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row admin-only">
+            <div class="col-lg-6">
+              <div class="card mb-3">
+                <div class="card-header"><i class="fa fa-building"></i> Vendor Ozeti</div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <div class="mini-stat">
+                        <span class="label">Toplam Vendor</span>
+                        <strong id="metric-total-vendors">0</strong>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="mini-stat">
+                        <span class="label">Aktif Vendor</span>
+                        <strong id="metric-active-vendors">0</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="card mb-3">
+                <div class="card-header"><i class="fa fa-info-circle"></i> Demo Erisim</div>
+                <div class="card-body">
+                  <p class="mb-2"><strong>Admin:</strong> +900000000000</p>
+                  <p class="mb-2"><strong>Vendor:</strong> +905550000101</p>
+                  <p class="mb-0 text-muted">
+                    OTP isteginde test kodu response icinde doner ve form alanina otomatik yazilir.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="vendors-section" class="app-section d-none admin-only">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="card mb-3">
+                <div class="card-header"><i class="fa fa-plus-circle"></i> Yeni Vendor</div>
+                <div class="card-body">
+                  <form id="vendor-form">
+                    <div class="form-group">
+                      <label>Vendor adi</label>
+                      <input class="form-control" name="name" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Telefon</label>
+                      <input class="form-control" name="phone_number" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Adres</label>
+                      <input class="form-control" name="address_line" required />
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label>Enlem</label>
+                        <input class="form-control" type="number" step="any" name="latitude" required />
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label>Boylam</label>
+                        <input class="form-control" type="number" step="any" name="longitude" required />
+                      </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Vendor olustur</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="card mb-3">
+                <div class="card-header"><i class="fa fa-list"></i> Vendor Listesi</div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th>Ad</th>
+                          <th>Telefon</th>
+                          <th>Adres</th>
+                          <th>Durum</th>
+                        </tr>
+                      </thead>
+                      <tbody id="vendors-table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="operators-section" class="app-section d-none admin-only">
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="card mb-3">
+                <div class="card-header"><i class="fa fa-user-plus"></i> Vendor Operatoru Ekle</div>
+                <div class="card-body">
+                  <form id="vendor-user-form">
+                    <div class="form-group">
+                      <label>Ad soyad</label>
+                      <input class="form-control" name="full_name" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Telefon</label>
+                      <input class="form-control" name="phone_number" required />
+                    </div>
+                    <div class="form-group">
+                      <label>Vendor</label>
+                      <select class="form-control" name="vendor_id" id="vendor-user-select" required></select>
+                    </div>
+                    <button class="btn btn-success" type="submit">Operator olustur</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7">
+              <div class="card mb-3">
+                <div class="card-header"><i class="fa fa-users"></i> Operator Listesi</div>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                        <tr>
+                          <th>Ad</th>
+                          <th>Telefon</th>
+                          <th>Vendor ID</th>
+                        </tr>
+                      </thead>
+                      <tbody id="vendor-users-table-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="orders-section" class="app-section d-none">
+          <div class="card mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span><i class="fa fa-table"></i> Siparis Akisi</span>
+              <span class="small text-muted" id="orders-subtitle">Tum siparisler</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Musteri</th>
+                      <th>Vendor</th>
+                      <th>Adres</th>
+                      <th>Durum</th>
+                      <th>Tutar</th>
+                      <th>Detay</th>
+                      <th>Islem</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orders-table-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="login-section" class="app-section d-none">
+          <div class="row justify-content-center">
+            <div class="col-lg-6">
+              <div class="card card-login mx-auto mt-5">
+                <div class="card-header">Telefon ile Giris</div>
+                <div class="card-body">
+                  <div class="form-group">
+                    <label>Telefon numarasi</label>
+                    <input class="form-control" id="phone-input" value="+900000000000" />
+                  </div>
+                  <div class="form-group">
+                    <label>OTP kodu</label>
+                    <input class="form-control" id="otp-input" />
+                  </div>
+                  <div class="form-group">
+                    <label>Yeni kullanici ise ad soyad</label>
+                    <input class="form-control" id="name-input" />
+                  </div>
+                  <div class="form-group mb-0">
+                    <button id="request-otp-btn" class="btn btn-secondary">OTP iste</button>
+                    <button id="verify-otp-btn" class="btn btn-primary">Giris yap</button>
+                  </div>
+                  <div class="alert alert-info mt-3 mb-0" id="auth-message">Oturum acin.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer class="sticky-footer">
+        <div class="container">
+          <div class="text-center">
+            <small>Dry Cleaning SaaS MVP</small>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <div class="modal fade" id="orderDetailModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="orderDetailTitle">Siparis Detayi</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body" id="order-detail-content"></div>
+          <div class="modal-footer" id="order-detail-actions"></div>
+        </div>
+      </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

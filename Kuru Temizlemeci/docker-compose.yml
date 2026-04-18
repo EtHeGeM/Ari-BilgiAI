@@ -1,0 +1,36 @@
+services:
+  app:
+    build: .
+    container_name: dry-cleaning-app
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:16-alpine
+    container_name: dry-cleaning-db
+    environment:
+      DATABASE_URL: postgresql+psycopg2://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-dry_cleaning}
+      REDIS_URL: redis://redis:6379/0
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-dry_cleaning}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: dry-cleaning-redis
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:

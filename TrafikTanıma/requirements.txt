@@ -1,0 +1,5 @@
+numpy>=1.26
+opencv-python>=4.9
+sqlalchemy>=2.0
+ultralytics>=8.2.0
+

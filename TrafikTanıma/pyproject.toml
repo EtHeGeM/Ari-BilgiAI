@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trafik-tanima"
+version = "0.1.0"
+description = "HD trafik videosunda araç sayma ve plaka okuma (SQLite kaydıyla)."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.26",
+  "opencv-python>=4.9",
+  "sqlalchemy>=2.0",
+  "ultralytics>=8.2.0",
+]
+
+[project.optional-dependencies]
+ocr_easyocr = ["easyocr>=1.7.1"]
+ocr_tesseract = ["pytesseract>=0.3.10"]
+youtube = ["yt-dlp>=2024.4.9"]
+ui = ["streamlit>=1.32"]
+
+[project.scripts]
+trafiktanima = "traffic_recognition.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

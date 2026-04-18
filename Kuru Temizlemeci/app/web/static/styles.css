@@ -1,0 +1,229 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+body.sticky-footer {
+  margin-bottom: 56px;
+}
+
+body.sticky-footer .content-wrapper {
+  min-height: calc(100vh - 56px - 56px);
+}
+
+body.fixed-nav {
+  padding-top: 56px;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 56px);
+  padding-top: 1rem;
+  background: #f5f7fb;
+}
+
+.scroll-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 3px;
+  display: none;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: white;
+  background: rgba(52, 58, 64, 0.5);
+  line-height: 45px;
+}
+
+.scroll-to-top:hover {
+  color: white;
+  background: #343a40;
+}
+
+.o-hidden {
+  overflow: hidden !important;
+}
+
+#mainNav .navbar-collapse {
+  overflow: auto;
+  max-height: 75vh;
+}
+
+#mainNav .navbar-brand {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+#mainNav .navbar-collapse .navbar-nav .nav-item .nav-link {
+  cursor: pointer;
+}
+
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
+  float: right;
+  content: "\f107";
+  font-family: "FontAwesome";
+}
+
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-collapse.collapsed:after {
+  content: "\f105";
+}
+
+#mainNav .navbar-collapse .navbar-sidenav,
+#mainNav .navbar-collapse .sidenav-toggler {
+  background: #212529;
+}
+
+#mainNav .navbar-collapse .navbar-sidenav .nav-link-text {
+  font-size: 0.94rem;
+}
+
+#mainNav .navbar-collapse .navbar-sidenav .nav-item.active > .nav-link,
+#mainNav .navbar-collapse .navbar-sidenav .nav-link.active {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(0, 123, 255, 0.18), transparent);
+}
+
+#mainNav .navbar-collapse .sidenav-toggler {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  #mainNav .navbar-brand {
+    width: 250px;
+  }
+
+  #mainNav .navbar-collapse {
+    overflow: visible;
+    max-height: none;
+  }
+
+  #mainNav .navbar-collapse .navbar-sidenav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    margin-top: 56px;
+  }
+
+  #mainNav .navbar-collapse .navbar-sidenav > .nav-item {
+    width: 250px;
+    padding: 0;
+  }
+
+  #mainNav .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
+    padding: 1rem;
+  }
+
+  #mainNav .navbar-collapse .sidenav-toggler {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: calc(100vh - 56px);
+  }
+
+  #mainNav .navbar-collapse .sidenav-toggler > .nav-item {
+    width: 250px;
+    padding: 0;
+  }
+
+  #mainNav .navbar-collapse .sidenav-toggler > .nav-item > .nav-link {
+    padding: 1rem;
+  }
+
+  .content-wrapper {
+    margin-left: 250px;
+  }
+}
+
+body.sidenav-toggled .content-wrapper {
+  margin-left: 55px;
+}
+
+body.sidenav-toggled #mainNav .navbar-brand {
+  width: 55px;
+}
+
+body.sidenav-toggled #mainNav .navbar-brand::after {
+  content: "DC";
+}
+
+body.sidenav-toggled #mainNav .navbar-brand {
+  overflow: hidden;
+  color: transparent;
+}
+
+body.sidenav-toggled #mainNav .navbar-collapse .navbar-sidenav {
+  width: 55px;
+}
+
+body.sidenav-toggled #mainNav .navbar-collapse .navbar-sidenav .nav-link-text {
+  display: none;
+}
+
+.breadcrumb {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+  font-weight: 600;
+}
+
+.card-login {
+  max-width: 32rem;
+}
+
+.mini-stat {
+  border-radius: 0.5rem;
+  background: #f8f9fc;
+  padding: 1rem;
+}
+
+.mini-stat .label {
+  display: block;
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.mini-stat strong {
+  display: block;
+  font-size: 1.8rem;
+  line-height: 1.2;
+}
+
+.status-badge {
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.order-detail-list {
+  padding-left: 1.1rem;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.app-section.d-none {
+  display: none !important;
+}
+
+.admin-only.hidden-by-role,
+.vendor-only.hidden-by-role {
+  display: none !important;
+}
+
+.alert {
+  white-space: pre-line;
+}
