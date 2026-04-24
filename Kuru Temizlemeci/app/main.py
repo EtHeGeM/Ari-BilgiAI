@@ -8,6 +8,7 @@ from app.api.v1.router import api_router
 from app.core.config import get_settings
 from app.db.base import Base
 from app.db.session import SessionLocal, engine
+from app.services.traffic_recognition_service import ensure_traffic_tables
 from app.utils.bootstrap import ensure_default_admin, ensure_demo_data
 from app.web.routes import router as web_router
 from app import models  # noqa: F401
@@ -19,6 +20,8 @@ static_dir = Path(__file__).resolve().parent / "web" / "static"
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     Base.metadata.create_all(bind=engine)
+    # TrafikTanıma tablolarını aynı DB bağlantısı üzerinden oluştur (opsiyonel).
+    ensure_traffic_tables(engine)
     db = SessionLocal()
     try:
         ensure_default_admin(db)

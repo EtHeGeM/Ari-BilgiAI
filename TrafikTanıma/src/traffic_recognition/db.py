@@ -54,8 +54,11 @@ class PlateRead(Base):
 
 
 def open_db(db_path: str):
-    # sqlite:///absolute/path or sqlite:///relative
-    if db_path.startswith("sqlite:"):
+    # Desteklenen formatlar:
+    # - sqlite dosya yolu: data/traffic.sqlite  -> sqlite:///data/traffic.sqlite
+    # - tam SQLAlchemy URL: postgresql+psycopg2://... veya sqlite:///... veya sqlite+pysqlite://...
+    # - sqlite:* URL: sqlite:////abs/path.db, sqlite:///relative.db
+    if db_path.startswith("sqlite:") or "://" in db_path:
         url = db_path
     else:
         url = f"sqlite:///{db_path}"

@@ -6,9 +6,18 @@ from dataclasses import dataclass
 
 import cv2
 import numpy as np
+from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 
-from traffic_recognition.db import RunSession, open_db, insert_plate_read, update_best_plate, upsert_vehicle_track, TrackUpsert
+from traffic_recognition.db import (
+    Base,
+    RunSession,
+    TrackUpsert,
+    insert_plate_read,
+    open_db,
+    update_best_plate,
+    upsert_vehicle_track,
+)
 from traffic_recognition.ocr import build_ocr_engine, looks_like_tr_plate, normalize_plate
 from traffic_recognition.plates import (
     BBox,
@@ -93,6 +102,7 @@ def _resolve_ultralytics_device(requested: str, *, torch) -> str | int:
 def run_video_pipeline(
     cfg: PipelineConfig,
     *,
+    db_engine: Engine | None = None,
     on_frame: "callable[[int, np.ndarray, dict], None] | None" = None,
     should_stop: "callable[[], bool] | None" = None,
 ) -> PipelineSummary:
@@ -103,7 +113,10 @@ def run_video_pipeline(
     from ultralytics import YOLO  # type: ignore
     import torch  # type: ignore
 
-    engine = open_db(cfg.db_path)
+    engine = db_engine or open_db(cfg.db_path)
+    if db_engine is not None:
+        # Dışarıdan engine verildiyse tabloları burada garanti altına al.
+        Base.metadata.create_all(engine)
     ocr = build_ocr_engine(cfg.ocr_engine, cfg.ocr_langs or ["en"], ocr_gpu=cfg.ocr_gpu)
     # cihaz seçimi
     ultra_device = _resolve_ultralytics_device(cfg.device, torch=torch)
