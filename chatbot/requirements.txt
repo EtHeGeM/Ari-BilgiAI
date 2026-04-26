@@ -1,0 +1,16 @@
+requests
+
+beautifulsoup4
+
+langchain-ollama
+
+langchain-core
+langchain-community
+langchain-text-splitters
+langchain-chroma
+
+chromadb
+playwright
+
+fastapi
+uvicorn[standard]

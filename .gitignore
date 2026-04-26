@@ -28,6 +28,18 @@ ENV/
 
 # Generated outputs
 outputs/
+comments_*.csv
+film_yorumlar.txt
+yorumlar.txt
+chatbot/data/
+!chatbot/data/.gitkeep
+text/*.csv
+
+# Local vector DBs / caches
+chatbot/.chroma_film_yorumlar/
+
+# Archives
+*.rar
 
 # OS
 .DS_Store
