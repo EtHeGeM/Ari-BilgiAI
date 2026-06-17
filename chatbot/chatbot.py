@@ -269,7 +269,12 @@ def _rt_fetch_reviews(
         page_info = payload.get("pageInfo") or {}
 
         for rv in reviews:
-            rid = str(rv.get("reviewId") or "").strip()
+            rid = str(rv.get("reviewId") or rv.get("ratingId") or "").strip()
+            if not rid:
+                try:
+                    rid = hashlib.sha256(json.dumps(rv, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
+                except Exception:
+                    rid = ""
             if not rid or rid in seen_ids:
                 continue
             seen_ids.add(rid)
